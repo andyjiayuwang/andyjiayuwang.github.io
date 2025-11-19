@@ -1,169 +1,245 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Andy J. Wang</title>
-  <style>
-    body {
-      font-family: Arial, "Noto Sans", "Noto Serif", "Segoe UI", sans-serif;
-      margin: 0;
-      color: #333;
-      background-color: #fff;
-    }
-    header {
-      padding: 1rem 2rem;
-      border-bottom: 1px solid #ddd;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-    header h1 {
-      font-size: 1.4rem;
-      margin: 0;
-      font-weight: 600;
-    }
-    nav a {
-      margin-left: 1.5rem;
-      text-decoration: none;
-      color: #333;
-      font-weight: 500;
-    }
-    nav a:hover {
-      text-decoration: underline;
-    }
-    main {
-      max-width: 900px;
-      margin: 2rem auto;
-      padding: 0 1rem;
-    }
-    section {
-      margin-bottom: 3rem;
-    }
-    .home-container {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 2rem;
-      align-items: flex-start;
-    }
-    .profile {
-      flex: 0 0 250px;
-      text-align: center;
-    }
-    .profile img {
-      width: 100%;
-      height: auto;
-      border: 1px solid #ddd;
-    }
-    .profile h2 {
-      margin-top: 0.5rem;
-      font-size: 1.2rem;
-      font-weight: 600;
-    }
-    .chinese-name {
-      font-size: 1rem;
-      color: #555;
-      font-family: "Noto Sans", "Noto Serif", "Arial Unicode MS", sans-serif;
-    }
-    .profile a {
-      display: inline-block;
-      margin-top: 0.3rem;
-      color: #0066cc;
-      text-decoration: none;
-      font-size: 0.95rem;
-    }
-    .profile a:hover {
-      text-decoration: underline;
-    }
-    .social-links {
-      margin-top: 0.5rem;
-      display: flex;
-      justify-content: center;
-      gap: 1rem;
-    }
-    .social-links a svg {
-      width: 22px;
-      height: 22px;
-      color: #333;
-      transition: color 0.2s ease-in-out;
-    }
-    .social-links a:hover svg {
-      color: #0066cc;
-    }
-    .home-text {
-      flex: 1;
-      min-width: 250px;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Andy J. Wang</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
+    <style>
+
+        :root {
+            --color-bg-light: #ffffff;
+            --color-text-light: #1a1a1a;
+            --color-primary-light: #007bff; 
+            --color-secondary-light: #6c757d;
+            --color-border-light: #e0e0e0;
+
+            --spacing-unit: 1rem;
+            --max-width: 1000px;
+        }
+        
+        body {
+
+            font-family: 'Inter', Arial, sans-serif;
+            margin: 0;
+            color: var(--color-text-light);
+            background-color: var(--color-bg-light);
+            line-height: 1.6;
+            transition: background-color 0.3s, color 0.3s; 
+        }
+        
+        header {
+            padding: calc(var(--spacing-unit) * 1.5) calc(var(--spacing-unit) * 2);
+            border-bottom: 1px solid var(--color-border-light);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        header h1 {
+            font-size: 1.6rem; 
+            margin: 0;
+            font-weight: 700; 
+            letter-spacing: -0.5px; 
+        }
+        nav a {
+            margin-left: calc(var(--spacing-unit) * 1.8); 
+            text-decoration: none;
+            color: var(--color-secondary-light);
+            font-weight: 500;
+            position: relative;
+            transition: color 0.3s ease;
+        }
+        nav a:hover {
+            color: var(--color-primary-light); 
+        }
+        
+        nav a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background-color: var(--color-primary-light);
+            transition: width 0.3s ease-out;
+        }
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        main {
+            max-width: var(--max-width);
+            margin: calc(var(--spacing-unit) * 3) auto; 
+            padding: 0 var(--spacing-unit);
+        }
+        section {
+            margin-bottom: calc(var(--spacing-unit) * 4);
+        }
+        
+        .home-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: calc(var(--spacing-unit) * 3); 
+            align-items: flex-start;
+        }
+
+        .profile {
+            flex: 0 0 280px; 
+            text-align: left; 
+            padding: var(--spacing-unit);
+            border: 1px solid var(--color-border-light); 
+        }
+        .profile img {
+            width: 100%;
+            height: auto;
+            border: none; 
+            border-radius: 8px; 
+            object-fit: cover;
+            aspect-ratio: 4/5; 
+        }
+        .profile h2 {
+            margin-top: var(--spacing-unit);
+            font-size: 1.4rem;
+            font-weight: 700;
+        }
+        .chinese-name {
+            font-size: 0.95rem;
+            color: var(--color-secondary-light);
+            margin-bottom: var(--spacing-unit);
+            font-family: "Noto Serif", serif; 
+        }
+        .profile a {
+            display: block; 
+            margin-top: 0.3rem;
+            color: var(--color-primary-light);
+            text-decoration: none;
+            font-size: 0.95rem;
+            transition: color 0.2s;
+        }
+        .profile a:hover {
+            color: #0056b3; 
+        }
+
+        .social-links {
+            margin-top: calc(var(--spacing-unit) * 1.5);
+            display: flex;
+            justify-content: flex-start; 
+            gap: var(--spacing-unit);
+        }
+        .social-links a svg {
+            width: 24px; 
+            height: 24px;
+            color: var(--color-secondary-light);
+            transition: color 0.2s ease-in-out, transform 0.2s ease-in-out;
+        }
+        .social-links a:hover svg {
+            color: var(--color-primary-light);
+            transform: translateY(-2px); 
+        }
+
+        .home-text {
+            flex: 1;
+            min-width: 300px; 
+            padding-top: 0.5rem; 
+        }
+        .home-text p {
+            font-size: 1.15rem; 
+            color: var(--color-text-light);
+            margin-top: 0;
+            margin-bottom: 0;
+            font-weight: 300; 
+        }
+
+        @media (max-width: 768px) {
+            header {
+                flex-direction: column;
+                padding: var(--spacing-unit);
+            }
+            header h1 {
+                margin-bottom: 0.5rem;
+            }
+            nav {
+                width: 100%;
+                text-align: center;
+            }
+            nav a {
+                margin: 0 0.5rem;
+            }
+            .home-container {
+                flex-direction: column;
+                gap: calc(var(--spacing-unit) * 2);
+            }
+            .profile {
+                flex: 0 0 auto;
+                width: 100%;
+                text-align: center; 
+                padding: 0;
+                border: none; 
+            }
+            .profile img {
+                max-width: 250px;
+                margin: 0 auto;
+            }
+            .social-links {
+                justify-content: center; 
+            }
+            .home-text {
+                padding-top: 0;
+            }
+        }
+    </style>
 </head>
 
 <body>
-  <header>
-    <h1>Andy J. Wang</h1>
-    <nav>
-      <a href="index.html">Home</a>
-      <a href="research.html">Research</a>
-    </nav>
-  </header>
+    <header>
+        <h1>Andy J. Wang</h1>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="research.html">Research</a>
+        </nav>
+    </header>
 
-  <main>
-    <section id="home">
-      <div class="home-container">
-        <div class="profile">
-          <img src="me2510.jpg" alt="Profile photo">
-          <h2>Andy J. Wang</h2>
+    <main>
+        <section id="home">
+            <div class="home-container">
+                <div class="profile">
+                    <img src="me2510.jpg" alt="Profile photo">
+                    
+                    <h2>Andy J. Wang</h2>
+                    <div class="chinese-name">王嘉宇 [heŋ˧˥ ɡia˥ u˩]</div>
 
-          <div class="chinese-name">王嘉宇 [heŋ˧˥ ɡia˥ u˩]</div>
+                    <a href="mailto:jiayu.wang@duke.edu">jiayu.wang@duke.edu</a>
+                    
+                    <div class="social-links">
+                        <a href="https://x.com/andywjy4" target="_blank" aria-label="X (Twitter)">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 1227" fill="currentColor">
+                                <path d="M714.163 519.284L1160.89 0H1055.03L667.137 450.887L365.601 0H0L468.492 682.678L0 1226.83H105.866L516.64 747.076L834.399 1226.83H1200L714.137 519.284H714.163ZM571.591 682.698L522.204 611.367L144.011 80.014H312.326L602.328 497.365L651.715 568.696L1055.47 1146.82H887.155L571.591 682.698Z"/>
+                            </svg>
+                        </a>
+                        
+                        <a href="https://github.com/andyjiayuwang" target="_blank" aria-label="GitHub">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61 -.546-1.387-1.333-1.757-1.333-1.757-1.089-.745.083-.729.083-.729 1.205.084 1.84 1.236 1.84 1.236 1.07 1.835 2.809 1.304 3.495.997.108-.775.418-1.305.762-1.605-2.665-.3-5.466-1.334-5.466-5.93 0-1.31.468-2.38 1.236-3.22-.123-.303-.535-1.523.117-3.176 0 0 1.008-.322 3.301 1.23a11.52 11.52 0 0 1 3.003-.404 11.49 11.49 0 0 1 3.003.404c2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.873.119 3.176.77.84 1.234 1.91 1.234 3.22 0 4.61-2.803 5.625-5.475 5.921.43.372.823 1.102.823 2.222 0 1.606-.015 2.898-.015 3.293 0 .321.216.694.825.576C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/>
+                            </svg>
+                        </a>
 
-          <a href="mailto:jiayu.wang@duke.edu">jiayu.wang@duke.edu</a>
+                        <a href="cvwang2510.pdf" target="_blank" aria-label="CV">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M6 2a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6H6zm7 1.5L18.5 9H13V3.5zM8 13h8v2H8v-2zm0 4h8v2H8v-2z"/>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
 
-          <div class="social-links">
-            <!-- X -->
-            <a href="https://x.com/andywjy4" target="_blank" aria-label="X (Twitter)">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 1227" fill="currentColor">
-                <path d="M714.163 519.284L1160.89 0H1055.03L667.137 450.887L365.601 0H0L468.492 682.678L0 1226.83H105.866L516.64 747.076L834.399 1226.83H1200L714.137 519.284H714.163ZM571.591 682.698L522.204 611.367L144.011 80.014H312.326L602.328 497.365L651.715 568.696L1055.47 1146.82H887.155L571.591 682.698Z"/>
-              </svg>
-            </a>
-
-            <!-- GitHub -->
-            <a href="https://github.com/andyjiayuwang" target="_blank" aria-label="GitHub">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 
-                3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 
-                0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61
-                -.546-1.387-1.333-1.757-1.333-1.757-1.089-.745.083-.729.083-.729 
-                1.205.084 1.84 1.236 1.84 1.236 1.07 1.835 2.809 
-                1.304 3.495.997.108-.775.418-1.305.762-1.605-2.665-.3-5.466-1.334-5.466-5.93 
-                0-1.31.468-2.38 1.236-3.22-.123-.303-.535-1.523.117-3.176 
-                0 0 1.008-.322 3.301 1.23a11.52 11.52 0 0 1 3.003-.404 
-                11.49 11.49 0 0 1 3.003.404c2.291-1.552 3.297-1.23 
-                3.297-1.23.653 1.653.242 2.873.119 3.176.77.84 
-                1.234 1.91 1.234 3.22 0 4.61-2.803 5.625-5.475 
-                5.921.43.372.823 1.102.823 2.222 0 1.606-.015 
-                2.898-.015 3.293 0 .321.216.694.825.576C20.565 
-                22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/>
-              </svg>
-            </a>
-
-            <!-- CV -->
-            <a href="cvwang2510.pdf" target="_blank" aria-label="CV">
-              <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M6 2a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 
-                2 0 0 0 2-2V8l-6-6H6zm7 1.5L18.5 9H13V3.5zM8 
-                13h8v2H8v-2zm0 4h8v2H8v-2z"/>
-              </svg>
-            </a>
-          </div>
-        </div>
-
-        <div class="home-text">
-          <p>
-            I am a Master's student in political science at Duke University. Prior to Duke, I earned my Bachelor's degree in political science and economics at Peking University. My research interests lie in authoritarian politics (with a regional focus on China) and computational methods. In particular, I am working on state-society interaction, digital authoritarianism, political selection, causal learning, and deep learning for social science.
-          </p>
-        </div>
-      </div>
-    </section>
-  </main>
+                <div class="home-text">
+                    <p>
+                        I am a Master's student in political science at Duke University. Prior to Duke, I earned my Bachelor's degree in political science and economics at Peking University. 
+                        <br><br>
+                        My research interests lie in authoritarian politics (with a regional focus on China) and computational methods. In particular, I am working on state-society interaction, digital authoritarianism, political selection, causal learning, and deep learning for social science.
+                    </p>
+                </div>
+            </div>
+        </section>
+    </main>
 </body>
 </html>
-
