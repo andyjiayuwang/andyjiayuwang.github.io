@@ -1,2 +1,1 @@
-# me
-My personal website.
+The personal website of Andy J. Wang.
