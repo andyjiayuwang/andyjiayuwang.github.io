@@ -1,0 +1,1084 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>HTEPower | Andy J. Wang</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --color-bg-light: #ffffff;
+            --color-text-light: #1a1a1a;
+            --color-primary-light: #007bff;
+            --color-secondary-light: #6c757d;
+            --color-border-light: #e0e0e0;
+            --spacing-unit: 1rem;
+            --max-width: 1000px;
+        }
+
+        body {
+            font-family: 'Inter', Arial, sans-serif;
+            margin: 0;
+            color: var(--color-text-light);
+            background-color: var(--color-bg-light);
+            line-height: 1.6;
+        }
+
+        header {
+            padding: calc(var(--spacing-unit) * 1.5) calc(var(--spacing-unit) * 2);
+            border-bottom: 1px solid var(--color-border-light);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        header h1 {
+            font-size: 1.6rem;
+            margin: 0;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+        }
+
+        nav a {
+            margin-left: calc(var(--spacing-unit) * 1.8);
+            text-decoration: none;
+            color: var(--color-secondary-light);
+            font-weight: 500;
+            position: relative;
+            transition: color 0.3s ease;
+        }
+
+        nav a:hover {
+            color: var(--color-primary-light);
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background-color: var(--color-primary-light);
+            transition: width 0.3s ease-out;
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        main {
+            max-width: var(--max-width);
+            margin: calc(var(--spacing-unit) * 3) auto;
+            padding: 0 var(--spacing-unit);
+        }
+
+        h2 {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: calc(var(--spacing-unit) * 2);
+            border-bottom: none;
+            padding-bottom: 0;
+        }
+
+        section {
+            margin-bottom: calc(var(--spacing-unit) * 3);
+            padding-left: 0.5rem;
+        }
+
+        .citation-box {
+            border: 1px solid var(--color-border-light);
+            border-radius: 6px;
+            padding: calc(var(--spacing-unit) * 1.25);
+        }
+
+        .citation-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: var(--spacing-unit);
+        }
+
+        .citation-header p {
+            margin: 0;
+            font-size: 1rem;
+            font-weight: 500;
+        }
+
+        .bibtex-button {
+            flex: 0 0 auto;
+            border: 1px solid var(--color-primary-light);
+            border-radius: 4px;
+            padding: 0.45rem 0.8rem;
+            color: var(--color-primary-light);
+            background: var(--color-bg-light);
+            font: inherit;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: color 0.2s, background-color 0.2s;
+        }
+
+        .bibtex-button:hover,
+        .bibtex-button:focus-visible {
+            color: var(--color-bg-light);
+            background-color: var(--color-primary-light);
+        }
+
+        .bibtex-code {
+            margin: var(--spacing-unit) 0 0;
+            padding: var(--spacing-unit);
+            overflow-x: auto;
+            color: var(--color-text-light);
+            background-color: #f7f7f7;
+            border-radius: 4px;
+            white-space: pre;
+            font-family: Consolas, "Courier New", monospace;
+            font-size: 0.85rem;
+            line-height: 1.5;
+        }
+
+        .apa-citation {
+            margin: var(--spacing-unit) 0 0;
+            padding-top: var(--spacing-unit);
+            border-top: 1px solid var(--color-border-light);
+            font-size: 1rem;
+            font-weight: 300;
+        }
+
+        .accordion {
+            margin-bottom: calc(var(--spacing-unit) * 1.25);
+            border-top: 1px solid var(--color-border-light);
+            border-bottom: 1px solid var(--color-border-light);
+            background: var(--color-bg-light);
+        }
+
+        .accordion summary {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: var(--spacing-unit);
+            padding: 1.1rem 0.5rem;
+            cursor: pointer;
+            list-style: none;
+            font-size: 1.25rem;
+            font-weight: 650;
+            user-select: none;
+        }
+
+        .accordion summary::-webkit-details-marker {
+            display: none;
+        }
+
+        .accordion summary::after {
+            content: '+';
+            flex: 0 0 auto;
+            color: var(--color-primary-light);
+            font-size: 1.55rem;
+            font-weight: 400;
+            line-height: 1;
+        }
+
+        .accordion[open] summary {
+            border-bottom: 1px solid var(--color-border-light);
+        }
+
+        .accordion[open] summary::after {
+            content: '−';
+        }
+
+        .accordion summary:hover,
+        .accordion summary:focus-visible {
+            color: var(--color-primary-light);
+            outline: none;
+        }
+
+        .accordion-body {
+            padding: 1.5rem 0.5rem 2rem;
+        }
+
+        .reading {
+            max-width: 820px;
+        }
+
+        .reading h3 {
+            margin: 2rem 0 0.65rem;
+            font-size: 1.2rem;
+        }
+
+        .reading h3:first-child {
+            margin-top: 0;
+        }
+
+        .reading p {
+            margin: 0 0 1rem;
+            font-size: 1.04rem;
+            font-weight: 300;
+        }
+
+        .formula {
+            margin: 1.25rem 0;
+            padding: 1rem 1.2rem;
+            overflow-x: auto;
+            border-left: 3px solid var(--color-primary-light);
+            background: #f7f9fb;
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: 1.12rem;
+            text-align: center;
+            white-space: nowrap;
+        }
+
+        .coefficient-grid,
+        .parameter-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 1.25rem;
+            margin: 1.25rem 0;
+        }
+
+        .coefficient-grid > div,
+        .parameter-grid > div {
+            padding: 0.4rem 0 0.4rem 0.9rem;
+            border-left: 2px solid var(--color-border-light);
+        }
+
+        .coefficient-grid strong,
+        .parameter-grid dt {
+            display: block;
+            margin-bottom: 0.25rem;
+            font-weight: 650;
+        }
+
+        .coefficient-grid span,
+        .parameter-grid dd {
+            margin: 0;
+            color: #4d555d;
+            font-size: 0.94rem;
+            font-weight: 300;
+        }
+
+        .split-flow {
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+            gap: 0.75rem;
+            align-items: stretch;
+            margin: 1.25rem 0;
+        }
+
+        .split-card {
+            padding: 0.9rem 0;
+            border-top: 1px solid var(--color-border-light);
+            border-bottom: 1px solid var(--color-border-light);
+        }
+
+        .split-card strong {
+            display: block;
+            margin-bottom: 0.35rem;
+        }
+
+        .split-card p {
+            margin: 0;
+            color: #4d555d;
+            font-size: 0.94rem;
+        }
+
+        .split-arrow {
+            align-self: center;
+            color: var(--color-primary-light);
+            font-size: 1.3rem;
+        }
+
+        .fraction {
+            display: inline-flex;
+            flex-direction: column;
+            vertical-align: middle;
+            line-height: 1.25;
+        }
+
+        .fraction > span:first-child {
+            padding: 0 0.35rem 0.2rem;
+            border-bottom: 1px solid currentColor;
+        }
+
+        .fraction > span:last-child {
+            padding: 0.2rem 0.35rem 0;
+        }
+
+        .tradeoff-table {
+            width: 100%;
+            margin: 1.25rem 0;
+            border-collapse: collapse;
+            font-size: 0.94rem;
+        }
+
+        .tradeoff-table th,
+        .tradeoff-table td {
+            padding: 0.8rem 0.55rem;
+            border-bottom: 1px solid var(--color-border-light);
+            text-align: left;
+            vertical-align: top;
+        }
+
+        .tradeoff-table th {
+            border-top: 1px solid var(--color-text-light);
+            border-bottom-color: var(--color-text-light);
+            background: transparent;
+            font-weight: 650;
+        }
+
+        .tradeoff-table tbody tr:last-child td {
+            border-bottom: 1px solid var(--color-text-light);
+        }
+
+        .takeaway {
+            padding: 0.9rem 1rem;
+            border-left: 3px solid var(--color-primary-light);
+            background: #f7f9fb;
+        }
+
+        .references {
+            margin: 0;
+            padding-left: 1.25rem;
+        }
+
+        .references li {
+            margin-bottom: 0.65rem;
+            font-size: 0.92rem;
+            font-weight: 300;
+        }
+
+        .calculator-grid {
+            display: grid;
+            grid-template-columns: minmax(280px, 0.82fr) minmax(340px, 1.18fr);
+            gap: 1.5rem;
+            align-items: start;
+        }
+
+        .calculator-controls {
+            display: grid;
+            gap: 1rem;
+        }
+
+        .control-group {
+            padding-bottom: 0.9rem;
+            border-bottom: 1px solid var(--color-border-light);
+        }
+
+        .control-heading {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: 0.75rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .control-heading label {
+            font-size: 0.95rem;
+            font-weight: 600;
+        }
+
+        .control-hint {
+            display: block;
+            margin-top: 0.1rem;
+            color: var(--color-secondary-light);
+            font-size: 0.78rem;
+            font-weight: 400;
+        }
+
+        .number-input {
+            width: 5.8rem;
+            padding: 0.35rem 0.45rem;
+            border: 1px solid #b8bec5;
+            border-radius: 4px;
+            color: var(--color-text-light);
+            background: var(--color-bg-light);
+            font: inherit;
+            font-variant-numeric: tabular-nums;
+        }
+
+        .range-input {
+            width: 100%;
+            accent-color: var(--color-primary-light);
+            cursor: pointer;
+        }
+
+        .number-input:focus-visible,
+        .range-input:focus-visible {
+            outline: 2px solid rgba(0, 123, 255, 0.3);
+            outline-offset: 2px;
+        }
+
+        .result-panel {
+            padding: 0.25rem 0 0.25rem 1.5rem;
+            border-left: 1px solid var(--color-border-light);
+            background: var(--color-bg-light);
+        }
+
+        .result-label {
+            margin: 0;
+            color: var(--color-secondary-light);
+            font-size: 0.78rem;
+            font-weight: 650;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+        }
+
+        .result-number {
+            margin: 0.15rem 0 0;
+            color: var(--color-primary-light);
+            font-size: clamp(2.5rem, 6vw, 4rem);
+            font-weight: 750;
+            letter-spacing: -0.04em;
+            line-height: 1.05;
+            font-variant-numeric: tabular-nums;
+        }
+
+        .result-unit {
+            margin: 0.2rem 0 1rem;
+            color: var(--color-secondary-light);
+            font-size: 0.9rem;
+        }
+
+        .result-stats {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 0.75rem;
+            margin: 0 0 1.3rem;
+        }
+
+        .result-stats div {
+            padding: 0.7rem 0;
+            border-top: 1px solid var(--color-border-light);
+        }
+
+        .result-stats dt {
+            color: var(--color-secondary-light);
+            font-size: 0.76rem;
+        }
+
+        .result-stats dd {
+            margin: 0.12rem 0 0;
+            font-size: 1rem;
+            font-weight: 650;
+            font-variant-numeric: tabular-nums;
+        }
+
+        .chart-title {
+            margin: 0 0 0.15rem;
+            font-size: 1rem;
+            font-weight: 650;
+        }
+
+        .chart-subtitle {
+            margin: 0 0 0.75rem;
+            color: var(--color-secondary-light);
+            font-size: 0.8rem;
+        }
+
+        #power-chart {
+            display: block;
+            width: 100%;
+            height: auto;
+            overflow: visible;
+        }
+
+        .chart-grid {
+            stroke: #e5e8eb;
+            stroke-width: 1;
+        }
+
+        .chart-axis {
+            stroke: #747b82;
+            stroke-width: 1;
+        }
+
+        .chart-line {
+            fill: none;
+            stroke: var(--color-primary-light);
+            stroke-width: 3;
+        }
+
+        .chart-target-line {
+            stroke: #555d65;
+            stroke-width: 1.5;
+            stroke-dasharray: 5 4;
+        }
+
+        .chart-point {
+            fill: var(--color-bg-light);
+            stroke: var(--color-primary-light);
+            stroke-width: 3;
+        }
+
+        .chart-text {
+            fill: #646b72;
+            font-family: 'Inter', Arial, sans-serif;
+            font-size: 12px;
+        }
+
+        @media (max-width: 768px) {
+            header {
+                flex-direction: column;
+                padding: var(--spacing-unit);
+            }
+
+            header h1 {
+                margin-bottom: 0.5rem;
+            }
+
+            nav {
+                width: 100%;
+                text-align: center;
+            }
+
+            nav a {
+                margin: 0 0.5rem;
+            }
+
+            h2 {
+                font-size: 1.8rem;
+            }
+
+            .citation-header {
+                align-items: flex-start;
+                flex-direction: column;
+            }
+
+            .accordion-body {
+                padding: 1.25rem 0.5rem 1.5rem;
+            }
+
+            .coefficient-grid,
+            .parameter-grid,
+            .calculator-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .split-flow {
+                grid-template-columns: 1fr;
+            }
+
+            .split-arrow {
+                justify-self: center;
+                transform: rotate(90deg);
+            }
+
+            .tradeoff-table {
+                display: block;
+                overflow-x: auto;
+                white-space: normal;
+            }
+
+            .result-panel {
+                padding: 1.25rem 0 0;
+                border-top: 1px solid var(--color-border-light);
+                border-left: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Andy J. Wang</h1>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="research.html">Research</a>
+            <a href="HTEPower.html">HTEPower</a>
+        </nav>
+    </header>
+
+    <main>
+        <h2>Power Calculator for ML-Based HTE Detection in Experiments</h2>
+        <section>
+            <div class="citation-box">
+                <div class="citation-header">
+                    <p>Please use the following citations when using this calculator:</p>
+                    <button
+                        class="bibtex-button"
+                        type="button"
+                        aria-expanded="false"
+                        aria-controls="bibtex-entry"
+                    >BibTeX</button>
+                </div>
+
+                <pre class="bibtex-code" id="bibtex-entry" hidden><code>@unpublished{fu2026heterogeneous,
+  title={Heterogeneous treatment effects with machine learning: Power, design, and evidence from experiments},
+  author={Fu, Jiawei and Green, Donald P. and Wang, Andy J.},
+  note={Working paper},
+  year={2026}
+}</code></pre>
+
+                <p class="apa-citation">
+                    Fu, J., Green, D. P., &amp; Wang, A. J. (2026).
+                    Heterogeneous treatment effects with machine learning: Power, design, and
+                    evidence from experiments. <em>Working paper</em>.
+                </p>
+            </div>
+        </section>
+
+        <details class="accordion" open>
+            <summary>Introduction</summary>
+            <div class="accordion-body reading">
+                <h3>Why power matters for ML-based HTE analysis</h3>
+                <p>
+                    Machine-learning methods for heterogeneous treatment effect (HTE)
+                    estimation in social-science field experiments are becoming increasingly
+                    sophisticated. Flexible learners can search across many covariates,
+                    nonlinearities, and interactions, but a fitted CATE score is not by itself
+                    evidence that treatment effects are truly heterogeneous. Researchers still
+                    need an honest inferential test of whether the score captures genuine
+                    treatment-effect variation rather than sampling noise.
+                </p>
+                <p>
+                    The generic machine-learning framework of Chernozhukov et al. (2025)
+                    evaluates a learned CATE score with the weighted residual best linear
+                    predictor (BLP) regression
+                </p>
+                <div class="formula" role="img" aria-label="Y equals alpha zero prime R of X plus beta one times Z minus p of X plus beta two times Z minus p of X times centered S A of X plus epsilon">
+                    Y = α<sub>0</sub>′R(X) + β<sub>1</sub>{Z − p(X)}
+                    + β<sub>2</sub>{Z − p(X)}S̃<sub>A</sub>(X) + ε,
+                    &nbsp;w(X) = [p(X){1 − p(X)}]<sup>−1</sup>.
+                </div>
+                <p>
+                    Here, <em>S</em><sub>A</sub>(X) is the CATE score trained in an
+                    auxiliary sample and S̃<sub>A</sub>(X) is its centered version.
+                    <em>R</em>(X) contains noise-reducing controls, such as learned baseline
+                    and CATE predictions. The population coefficients have direct meanings:
+                </p>
+                <div class="coefficient-grid">
+                    <div>
+                        <strong>β<sub>1</sub> = E{s<sub>0</sub>(X)}</strong>
+                        <span>The average treatment effect (ATE), where s<sub>0</sub>(X) is the true CATE.</span>
+                    </div>
+                    <div>
+                        <strong>β<sub>2</sub> = Cov{s<sub>0</sub>(X), S<sub>A</sub>(X)} / Var{S<sub>A</sub>(X)}</strong>
+                        <span>The heterogeneity loading: the linear alignment between the learned score and the true CATE.</span>
+                    </div>
+                </div>
+                <p>
+                    The heterogeneity test is H<sub>0</sub>: β<sub>2</sub> = 0. Rejecting
+                    this null in an independent evaluation sample indicates both that HTE
+                    exists and that the planned learner has recovered informative variation.
+                    Failure to reject can mean either homogeneous effects or a learner that
+                    failed to capture existing heterogeneity.
+                </p>
+
+                <h3>Why the sample must be split</h3>
+                <p>
+                    Honest BLP evaluation separates model construction from model assessment.
+                    The two samples therefore have different jobs:
+                </p>
+                <div class="split-flow" aria-label="Auxiliary-to-main sample workflow">
+                    <div class="split-card">
+                        <strong>Auxiliary sample A</strong>
+                        <p>Estimate nuisance functions, tune and train the CATE learner, and fix the score S<sub>A</sub>(X).</p>
+                    </div>
+                    <div class="split-arrow" aria-hidden="true">→</div>
+                    <div class="split-card">
+                        <strong>Main sample M</strong>
+                        <p>Apply the fixed score to independent observations and run the weighted residual BLP test.</p>
+                    </div>
+                </div>
+                <p>
+                    Main-sample observations must not be reused to train the score being tested.
+                    Repeated splitting can stabilize results across splits, but it does not
+                    multiply the effective main-sample size.
+                </p>
+
+                <h3>The practical power formula</h3>
+                <p>
+                    Fu, Green, and Wang (2026) derive a design-stage approximation for the
+                    main-sample size needed by a two-sided BLP heterogeneity test:
+                </p>
+                <div class="formula" role="img" aria-label="n M is approximately Gamma alpha pi zero squared times one minus R B squared, divided by p times one minus p times R S squared times d tau squared">
+                    n<sub>M</sub> ≈
+                    <span class="fraction">
+                        <span>Γ<sup>2</sup><sub>α,π₀</sub>(1 − R<sub>B</sub><sup>2</sup>)</span>
+                        <span>p(1 − p)R<sub>S</sub><sup>2</sup>d<sub>τ</sub><sup>2</sup></span>
+                    </span>.
+                </div>
+                <dl class="parameter-grid">
+                    <div>
+                        <dt>α and π<sub>0</sub></dt>
+                        <dd>Two-sided significance level and target power; together they determine Γ<sub>α,π₀</sub>.</dd>
+                    </div>
+                    <div>
+                        <dt>p</dt>
+                        <dd>Treatment-assignment probability. Information is maximized at p = 0.5.</dd>
+                    </div>
+                    <div>
+                        <dt>R<sub>B</sub><sup>2</sup></dt>
+                        <dd>Out-of-sample predictive R<sup>2</sup> of the baseline adjustment; 1 − R<sub>B</sub><sup>2</sup> is remaining outcome variation.</dd>
+                    </div>
+                    <div>
+                        <dt>d<sub>τ</sub></dt>
+                        <dd>Standard deviation of the true CATE in reference outcome-standard-deviation units.</dd>
+                    </div>
+                    <div>
+                        <dt>R<sub>S</sub><sup>2</sup></dt>
+                        <dd>Fraction of total CATE variation captured by the linear projection on the planned learned score.</dd>
+                    </div>
+                    <div>
+                        <dt>n<sub>M</sub></dt>
+                        <dd>Required independent main-sample size, not the experiment's total enrollment.</dd>
+                    </div>
+                </dl>
+                <p>
+                    The approximation assumes constant treatment probability and that
+                    unexplained CATE variation and score-weighted heteroskedasticity are modest
+                    relative to remaining outcome noise. Use pilot or historical data to inform
+                    R<sub>B</sub><sup>2</sup>. Choose d<sub>τ</sub> as the smallest substantively
+                    relevant CATE variation, and treat R<sub>S</sub><sup>2</sup> as a sensitivity
+                    parameter when credible calibration data are unavailable.
+                </p>
+
+                <h3>Choosing the auxiliary–main share</h3>
+                <table class="tradeoff-table">
+                    <thead>
+                        <tr>
+                            <th>Allocation</th>
+                            <th>Potential benefit</th>
+                            <th>Main risk or cost</th>
+                            <th>Most relevant when</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>More to auxiliary A</td>
+                            <td>May improve nuisance models and the CATE learner.</td>
+                            <td>Leaves fewer observations for honest testing; can require larger total enrollment and may worsen small-main-sample size distortion.</td>
+                            <td>HTE is difficult to learn and the procedure needs substantial training data.</td>
+                        </tr>
+                        <tr>
+                            <td>More to main M</td>
+                            <td>Directly strengthens evaluation, reduces total enrollment needed for a fixed n<sub>M</sub>, and may improve size control.</td>
+                            <td>May weaken the learned score and baseline adjustment by reducing training data.</td>
+                            <td>The learner can be trained adequately on a smaller auxiliary sample.</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <p class="takeaway">
+                    <strong>No split is universally optimal.</strong> Compare plausible
+                    allocations while allowing R<sub>B</sub><sup>2</sup> and
+                    R<sub>S</sub><sup>2</sup> to change with auxiliary-sample size; do not hold
+                    learner quality fixed mechanically across splits.
+                </p>
+
+                <h3>References</h3>
+                <ol class="references">
+                    <li>
+                        Chernozhukov, V., Demirer, M., Duflo, E., &amp; Fernández-Val, I.
+                        (2025). Fisher–Schultz lecture: Generic machine learning inference on
+                        heterogeneous treatment effects in randomized experiments, with an
+                        application to immunization in India. <em>Econometrica, 93</em>(4),
+                        1121–1164.
+                    </li>
+                    <li>
+                        Fu, J., Green, D. P., &amp; Wang, A. J. (2026). Heterogeneous treatment
+                        effects with machine learning: Power, design, and evidence from
+                        experiments. <em>Working paper</em>.
+                    </li>
+                </ol>
+            </div>
+        </details>
+
+        <details class="accordion" open>
+            <summary>Calculator</summary>
+            <div class="accordion-body">
+                <div class="calculator-grid">
+                    <form class="calculator-controls" id="power-controls">
+                        <div class="control-group">
+                            <div class="control-heading">
+                                <label for="alpha-number">
+                                    Significance level α
+                                    <span class="control-hint">Two-sided Type I error rate</span>
+                                </label>
+                                <input class="number-input" id="alpha-number" type="number" min="0.001" max="0.2" step="0.001" value="0.05" data-key="alpha">
+                            </div>
+                            <input class="range-input" id="alpha-range" type="range" min="0.001" max="0.2" step="0.001" value="0.05" data-key="alpha" aria-label="Significance level alpha slider">
+                        </div>
+
+                        <div class="control-group">
+                            <div class="control-heading">
+                                <label for="power-number">
+                                    Target power π<sub>0</sub>
+                                    <span class="control-hint">Desired rejection probability under the alternative</span>
+                                </label>
+                                <input class="number-input" id="power-number" type="number" min="0.5" max="0.99" step="0.01" value="0.80" data-key="power">
+                            </div>
+                            <input class="range-input" id="power-range" type="range" min="0.5" max="0.99" step="0.01" value="0.80" data-key="power" aria-label="Target power slider">
+                        </div>
+
+                        <div class="control-group">
+                            <div class="control-heading">
+                                <label for="treatment-number">
+                                    Treatment probability p
+                                    <span class="control-hint">Share assigned to treatment</span>
+                                </label>
+                                <input class="number-input" id="treatment-number" type="number" min="0.05" max="0.95" step="0.01" value="0.50" data-key="treatment">
+                            </div>
+                            <input class="range-input" id="treatment-range" type="range" min="0.05" max="0.95" step="0.01" value="0.50" data-key="treatment" aria-label="Treatment probability slider">
+                        </div>
+
+                        <div class="control-group">
+                            <div class="control-heading">
+                                <label for="baseline-number">
+                                    Baseline predictive R<sub>B</sub><sup>2</sup>
+                                    <span class="control-hint">Out-of-sample predictive performance</span>
+                                </label>
+                                <input class="number-input" id="baseline-number" type="number" min="0" max="0.95" step="0.01" value="0.20" data-key="baseline">
+                            </div>
+                            <input class="range-input" id="baseline-range" type="range" min="0" max="0.95" step="0.01" value="0.20" data-key="baseline" aria-label="Baseline predictive R squared slider">
+                        </div>
+
+                        <div class="control-group">
+                            <div class="control-heading">
+                                <label for="cate-number">
+                                    Standardized CATE variation d<sub>τ</sub>
+                                    <span class="control-hint">CATE SD in outcome-SD units</span>
+                                </label>
+                                <input class="number-input" id="cate-number" type="number" min="0.01" max="1" step="0.01" value="0.20" data-key="cate">
+                            </div>
+                            <input class="range-input" id="cate-range" type="range" min="0.01" max="1" step="0.01" value="0.20" data-key="cate" aria-label="Standardized CATE variation slider">
+                        </div>
+
+                        <div class="control-group">
+                            <div class="control-heading">
+                                <label for="alignment-number">
+                                    Score alignment R<sub>S</sub><sup>2</sup>
+                                    <span class="control-hint">Fraction of CATE variation captured</span>
+                                </label>
+                                <input class="number-input" id="alignment-number" type="number" min="0.01" max="1" step="0.01" value="0.50" data-key="alignment">
+                            </div>
+                            <input class="range-input" id="alignment-range" type="range" min="0.01" max="1" step="0.01" value="0.50" data-key="alignment" aria-label="Score alignment R squared slider">
+                        </div>
+                    </form>
+
+                    <div class="result-panel" aria-live="polite">
+                        <p class="result-label">Required main-sample size</p>
+                        <p class="result-number" id="required-sample">—</p>
+                        <p class="result-unit">independent observations in M</p>
+                        <dl class="result-stats">
+                            <div>
+                                <dt>Required Γ<sub>α,π₀</sub></dt>
+                                <dd id="required-gamma">—</dd>
+                            </div>
+                            <div>
+                                <dt>Power after rounding n<sub>M</sub></dt>
+                                <dd id="rounded-power">—</dd>
+                            </div>
+                        </dl>
+
+                        <p class="chart-title">Power × main-sample size</p>
+                        <p class="chart-subtitle">Other inputs are held at their selected values.</p>
+                        <svg id="power-chart" viewBox="0 0 640 320" role="img" aria-labelledby="power-chart-title power-chart-desc">
+                            <title id="power-chart-title">Power by main-sample size</title>
+                            <desc id="power-chart-desc">A curve showing achieved two-sided BLP test power as the main-sample size increases.</desc>
+                            <g aria-hidden="true">
+                                <line class="chart-grid" x1="58" y1="22" x2="620" y2="22"></line>
+                                <line class="chart-grid" x1="58" y1="84" x2="620" y2="84"></line>
+                                <line class="chart-grid" x1="58" y1="146" x2="620" y2="146"></line>
+                                <line class="chart-grid" x1="58" y1="208" x2="620" y2="208"></line>
+                                <line class="chart-grid" x1="58" y1="270" x2="620" y2="270"></line>
+                                <line class="chart-axis" x1="58" y1="22" x2="58" y2="270"></line>
+                                <line class="chart-axis" x1="58" y1="270" x2="620" y2="270"></line>
+                                <text class="chart-text" x="48" y="26" text-anchor="end">1.00</text>
+                                <text class="chart-text" x="48" y="88" text-anchor="end">0.75</text>
+                                <text class="chart-text" x="48" y="150" text-anchor="end">0.50</text>
+                                <text class="chart-text" x="48" y="212" text-anchor="end">0.25</text>
+                                <text class="chart-text" x="48" y="274" text-anchor="end">0</text>
+                                <text class="chart-text" x="58" y="292" text-anchor="middle">0</text>
+                                <text class="chart-text" id="x-mid-label" x="339" y="292" text-anchor="middle">—</text>
+                                <text class="chart-text" id="x-max-label" x="620" y="292" text-anchor="middle">—</text>
+                                <text class="chart-text" x="339" y="314" text-anchor="middle">Main-sample size n<tspan baseline-shift="sub">M</tspan></text>
+                            </g>
+                            <path class="chart-line" id="power-line" d=""></path>
+                            <line class="chart-target-line" id="target-line" x1="0" y1="22" x2="0" y2="270"></line>
+                            <circle class="chart-point" id="target-point" cx="0" cy="0" r="5"></circle>
+                        </svg>
+
+                    </div>
+                </div>
+            </div>
+        </details>
+    </main>
+
+    <script>
+        const bibtexButton = document.querySelector('.bibtex-button');
+        const bibtexEntry = document.getElementById('bibtex-entry');
+
+        bibtexButton.addEventListener('click', () => {
+            const isExpanded = bibtexButton.getAttribute('aria-expanded') === 'true';
+            bibtexButton.setAttribute('aria-expanded', String(!isExpanded));
+            bibtexEntry.hidden = isExpanded;
+        });
+
+        const controls = Array.from(document.querySelectorAll('[data-key]'));
+        const numberFormatter = new Intl.NumberFormat('en-US');
+
+        function normalCdf(x) {
+            const sign = x < 0 ? -1 : 1;
+            const absolute = Math.abs(x) / Math.sqrt(2);
+            const t = 1 / (1 + 0.3275911 * absolute);
+            const coefficients = [
+                0.254829592,
+                -0.284496736,
+                1.421413741,
+                -1.453152027,
+                1.061405429
+            ];
+            let polynomial = coefficients[4];
+            for (let i = 3; i >= 0; i -= 1) {
+                polynomial = coefficients[i] + t * polynomial;
+            }
+            const erf = sign * (1 - polynomial * t * Math.exp(-absolute * absolute));
+            return 0.5 * (1 + erf);
+        }
+
+        function normalQuantile(probability) {
+            let lower = -8;
+            let upper = 8;
+            for (let i = 0; i < 70; i += 1) {
+                const midpoint = (lower + upper) / 2;
+                if (normalCdf(midpoint) < probability) {
+                    lower = midpoint;
+                } else {
+                    upper = midpoint;
+                }
+            }
+            return (lower + upper) / 2;
+        }
+
+        function powerFromDelta(delta, alpha) {
+            const critical = normalQuantile(1 - alpha / 2);
+            return 1 - normalCdf(critical - delta) + normalCdf(-critical - delta);
+        }
+
+        function requiredGamma(alpha, targetPower) {
+            let lower = 0;
+            let upper = 12;
+            for (let i = 0; i < 70; i += 1) {
+                const midpoint = (lower + upper) / 2;
+                if (powerFromDelta(midpoint, alpha) < targetPower) {
+                    lower = midpoint;
+                } else {
+                    upper = midpoint;
+                }
+            }
+            return (lower + upper) / 2;
+        }
+
+        function selectedValues() {
+            const values = {};
+            document.querySelectorAll('.number-input').forEach((input) => {
+                values[input.dataset.key] = Number(input.value);
+            });
+            return values;
+        }
+
+        function achievedPower(sampleSize, values) {
+            const information =
+                values.treatment *
+                (1 - values.treatment) *
+                values.alignment *
+                values.cate ** 2 /
+                (1 - values.baseline);
+            const delta = Math.sqrt(Math.max(0, sampleSize * information));
+            return powerFromDelta(delta, values.alpha);
+        }
+
+        function drawPowerCurve(values, requiredSample) {
+            const left = 58;
+            const right = 620;
+            const top = 22;
+            const bottom = 270;
+            const maximum = Math.max(
+                100,
+                Math.ceil((requiredSample * 1.6) / 100) * 100
+            );
+            const points = [];
+
+            for (let i = 0; i <= 120; i += 1) {
+                const sampleSize = maximum * i / 120;
+                const power = achievedPower(sampleSize, values);
+                const x = left + (right - left) * sampleSize / maximum;
+                const y = bottom - (bottom - top) * power;
+                points.push(`${i === 0 ? 'M' : 'L'} ${x.toFixed(2)} ${y.toFixed(2)}`);
+            }
+
+            document.getElementById('power-line').setAttribute('d', points.join(' '));
+            document.getElementById('x-mid-label').textContent =
+                numberFormatter.format(Math.round(maximum / 2));
+            document.getElementById('x-max-label').textContent =
+                numberFormatter.format(maximum);
+
+            const targetX = left + (right - left) * requiredSample / maximum;
+            const targetY = bottom - (bottom - top) * achievedPower(requiredSample, values);
+            const targetLine = document.getElementById('target-line');
+            const targetPoint = document.getElementById('target-point');
+            targetLine.setAttribute('x1', targetX);
+            targetLine.setAttribute('x2', targetX);
+            targetPoint.setAttribute('cx', targetX);
+            targetPoint.setAttribute('cy', targetY);
+        }
+
+        function updateCalculator() {
+            const values = selectedValues();
+            if (Object.values(values).some((value) => !Number.isFinite(value))) {
+                return;
+            }
+
+            const gamma = requiredGamma(values.alpha, values.power);
+            const denominator =
+                values.treatment *
+                (1 - values.treatment) *
+                values.alignment *
+                values.cate ** 2;
+            const rawSample = gamma ** 2 * (1 - values.baseline) / denominator;
+            const requiredSample = Math.ceil(rawSample);
+            const roundedPower = achievedPower(requiredSample, values);
+
+            document.getElementById('required-sample').textContent =
+                numberFormatter.format(requiredSample);
+            document.getElementById('required-gamma').textContent = gamma.toFixed(3);
+            document.getElementById('rounded-power').textContent =
+                roundedPower.toFixed(3);
+            drawPowerCurve(values, requiredSample);
+        }
+
+        controls.forEach((control) => {
+            control.addEventListener('input', () => {
+                const key = control.dataset.key;
+                controls
+                    .filter((candidate) => candidate.dataset.key === key && candidate !== control)
+                    .forEach((candidate) => {
+                        candidate.value = control.value;
+                    });
+                updateCalculator();
+            });
+
+            control.addEventListener('change', () => {
+                const minimum = Number(control.min);
+                const maximum = Number(control.max);
+                if (Number.isFinite(minimum) && Number(control.value) < minimum) {
+                    control.value = minimum;
+                }
+                if (Number.isFinite(maximum) && Number(control.value) > maximum) {
+                    control.value = maximum;
+                }
+                controls
+                    .filter((candidate) =>
+                        candidate.dataset.key === control.dataset.key &&
+                        candidate !== control
+                    )
+                    .forEach((candidate) => {
+                        candidate.value = control.value;
+                    });
+                updateCalculator();
+            });
+        });
+
+        updateCalculator();
+    </script>
+</body>
+</html>
