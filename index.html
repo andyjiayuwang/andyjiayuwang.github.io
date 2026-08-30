@@ -148,11 +148,18 @@
             margin-top: 0;
             margin-bottom: 0;
             font-weight: 300;
-            -webkit-hyphens: auto;
-            hyphens: auto;
-            hyphenate-limit-chars: 6 3 3;
-            overflow-wrap: break-word;
+            -webkit-hyphens: none;
+            hyphens: none;
+            overflow-wrap: normal;
+            word-break: normal;
+            max-width: 68ch;
             text-wrap: pretty;
+        }
+        .home-text p:first-child {
+            text-wrap: balance;
+        }
+        .home-text p + p {
+            margin-top: 2rem;
         }
         .school-chinese-name {
             font-family: SimSun, "Songti SC", serif;
@@ -195,6 +202,10 @@
             }
             .home-text {
                 padding-top: 0;
+            }
+            .home-text p {
+                font-size: 1.08rem;
+                line-height: 1.72;
             }
         }
     </style>
@@ -245,8 +256,9 @@
                 <div class="home-text">
                     <p>
                         I am a Master's student in political science at Duke University. Before moving to Duke, I earned my Bachelor's degree in political science and economics at Peking University.
-                        <br><br>
-                        My research sits at the intersection of authoritarian politics, causal inference, and computational social science. Substantively, I am working on how the elite politics of communist parties shape the dynamics of both cooperative and antagonistic state-society interactions in contemporary China. Methodologically, I am interested in experiment design and analysis, doubly-robust causal learning, heterogeneous treatment effect estimation, and how deep learning algorithms can empower empirical research through structured and unstructured data processing. 
+                    </p>
+                    <p>
+                        My research sits at the intersection of authoritarian politics, causal inference, and computational social science. Substantively, I am working on how the elite politics of communist parties shape the dynamics of both cooperative and antagonistic state-society interactions in contemporary China. Methodologically, I am interested in experiment design and analysis, doubly-robust causal learning, heterogeneous treatment effect estimation, and how deep learning algorithms can empower empirical research through structured and unstructured data processing.
                     </p>
                 </div>
             </div>
