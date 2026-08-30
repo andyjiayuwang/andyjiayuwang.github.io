@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Andy J. Wang</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Source+Serif+4:opsz,wght@8..60,400;8..60,500&display=swap" rel="stylesheet">
     <style>
 
         :root {
@@ -123,43 +123,108 @@
         .social-links {
             margin-top: calc(var(--spacing-unit) * 1.5);
             display: flex;
-            justify-content: flex-start; 
+            justify-content: flex-start;
             gap: var(--spacing-unit);
         }
-        .social-links a svg {
-            width: 24px; 
+        .social-links a {
+            width: 24px;
             height: 24px;
+            margin-top: 0;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
             color: var(--color-secondary-light);
             transition: color 0.2s ease-in-out, transform 0.2s ease-in-out;
         }
-        .social-links a:hover svg {
+        .social-links a:hover {
             color: var(--color-primary-light);
-            transform: translateY(-2px); 
+            transform: translateY(-2px);
+        }
+        .social-links a svg {
+            width: 24px;
+            height: 24px;
+            color: currentColor;
+        }
+        .social-links .cv-link {
+            box-sizing: border-box;
+            border: 1.5px solid currentColor;
+            border-radius: 3px;
+            font-size: 0.64rem;
+            font-weight: 750;
+            line-height: 1;
+            letter-spacing: 0.035em;
         }
 
         .home-text {
             flex: 1;
-            min-width: 300px; 
-            padding-top: 0.5rem; 
+            min-width: 0;
+            max-width: 640px;
+            padding-top: 0.35rem;
         }
         .home-text p {
-            font-size: 1.15rem;
-            color: var(--color-text-light);
-            margin-top: 0;
-            margin-bottom: 0;
-            font-weight: 300;
+            margin: 0;
             -webkit-hyphens: none;
             hyphens: none;
             overflow-wrap: normal;
             word-break: normal;
-            max-width: 68ch;
-            text-wrap: pretty;
         }
-        .home-text p:first-child {
-            text-wrap: balance;
+        .bio-intro {
+            max-width: 35ch;
+            color: #262626;
+            font-family: "Source Serif 4", Georgia, serif;
+            font-size: clamp(1.24rem, 1.14rem + 0.35vw, 1.42rem);
+            font-weight: 400;
+            line-height: 1.55;
+            letter-spacing: -0.012em;
         }
-        .home-text p + p {
-            margin-top: 2rem;
+        .research-overview {
+            margin-top: 2.35rem;
+            padding-top: 1.4rem;
+            border-top: 1px solid var(--color-border-light);
+        }
+        .research-overview h3 {
+            margin: 0 0 0.75rem;
+            color: var(--color-secondary-light);
+            font-size: 0.76rem;
+            font-weight: 700;
+            line-height: 1.3;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+        }
+        .research-lede,
+        .research-block p {
+            color: #2b2b2b;
+            font-family: "Source Serif 4", Georgia, serif;
+            font-weight: 400;
+        }
+        .research-lede {
+            max-width: 55ch;
+            font-size: 1.08rem;
+            line-height: 1.72;
+        }
+        .research-details {
+            display: grid;
+            gap: 1.3rem;
+            margin-top: 1.55rem;
+        }
+        .research-block {
+            display: grid;
+            grid-template-columns: 8.75rem minmax(0, 1fr);
+            gap: 1.15rem;
+            align-items: start;
+        }
+        .research-block h4 {
+            margin: 0.3rem 0 0;
+            color: var(--color-secondary-light);
+            font-size: 0.75rem;
+            font-weight: 650;
+            line-height: 1.35;
+            letter-spacing: 0.07em;
+            text-transform: uppercase;
+        }
+        .research-block p {
+            font-size: 1.02rem;
+            line-height: 1.72;
         }
         .school-chinese-name {
             font-family: SimSun, "Songti SC", serif;
@@ -201,11 +266,34 @@
                 justify-content: center; 
             }
             .home-text {
+                width: 100%;
+                max-width: none;
                 padding-top: 0;
             }
-            .home-text p {
-                font-size: 1.08rem;
+            .bio-intro {
+                max-width: none;
+                font-size: 1.15rem;
+                line-height: 1.62;
+            }
+            .research-overview {
+                margin-top: 2rem;
+                padding-top: 1.25rem;
+            }
+            .research-lede,
+            .research-block p {
+                font-size: 1rem;
                 line-height: 1.72;
+            }
+            .research-details {
+                gap: 1.45rem;
+                margin-top: 1.45rem;
+            }
+            .research-block {
+                grid-template-columns: 1fr;
+                gap: 0.35rem;
+            }
+            .research-block h4 {
+                margin-top: 0;
             }
         }
     </style>
@@ -245,21 +333,30 @@
                             </svg>
                         </a>
 
-                        <a href="cvwang2607.pdf" target="_blank" aria-label="CV">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
-                                <path d="M6 2a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6H6zm7 1.5L18.5 9H13V3.5zM8 13h8v2H8v-2zm0 4h8v2H8v-2z"/>
-                            </svg>
+                        <a class="cv-link" href="cvwang2607.pdf" target="_blank" aria-label="Curriculum vitae (PDF)" title="Curriculum vitae (PDF)">
+                            <span aria-hidden="true">CV</span>
                         </a>
                     </div>
                 </div>
 
                 <div class="home-text">
-                    <p>
+                    <p class="bio-intro">
                         I am a Master's student in political science at Duke University. Before moving to Duke, I earned my Bachelor's degree in political science and economics at Peking University.
                     </p>
-                    <p>
-                        My research sits at the intersection of authoritarian politics, causal inference, and computational social science. Substantively, I am working on how the elite politics of communist parties shape the dynamics of both cooperative and antagonistic state-society interactions in contemporary China. Methodologically, I am interested in experiment design and analysis, doubly-robust causal learning, heterogeneous treatment effect estimation, and how deep learning algorithms can empower empirical research through structured and unstructured data processing.
-                    </p>
+                    <div class="research-overview">
+                        <h3>Research</h3>
+                        <p class="research-lede">My research sits at the intersection of authoritarian politics, causal inference, and computational social science.</p>
+                        <div class="research-details">
+                            <div class="research-block">
+                                <h4>Substantively</h4>
+                                <p>I am working on how the elite politics of communist parties shape the dynamics of both cooperative and antagonistic state-society interactions in contemporary China.</p>
+                            </div>
+                            <div class="research-block">
+                                <h4>Methodologically</h4>
+                                <p>I am interested in experiment design and analysis, doubly-robust causal learning, heterogeneous treatment effect estimation, and how deep learning algorithms can empower empirical research through structured and unstructured data processing.</p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
